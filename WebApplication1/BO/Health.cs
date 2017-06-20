@@ -20,8 +20,26 @@ namespace WebApplication1.BO
             var bmi = bodyInfo.weight / (height * height);
             return new ExecuteCommandDefaultResult() { Data = bmi, isSuccess = true };
         }
-    }
 
+        public ExecuteCommandDefaultResult CalDate(DateInfo dateinfo)
+        {
+            try
+            {
+                DateTime dtfrom = Convert.ToDateTime(dateinfo.nowdate);
+                var dtto = dtfrom.AddDays(29).ToString("yyyy-MM-dd");
+                return new ExecuteCommandDefaultResult() { Data = dtto, isSuccess = true };
+            }
+            catch (Exception ee)
+            {
+                return new ExecuteCommandDefaultResult() { Data = "异常:"+ee.ToString(), isSuccess = false };
+            }
+
+        }
+    }
+    public class DateInfo
+    {
+        public string nowdate { get; set; }
+    }
     /// <summary>
     /// 個人身高體重
     /// </summary>

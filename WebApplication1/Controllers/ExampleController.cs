@@ -20,10 +20,11 @@ namespace WebApplication1.Controllers
                 //AssemblyLauncher
                 AssemblyLauncher assemblyLauncher = new AssemblyLauncher();
                 //執行指定的Method
+                string requstjsonstr = Request.Content.ReadAsStringAsync().Result;
                 var ret = assemblyLauncher.ExecuteCommand<BO.Health>(
                     new BO.Health(),
                     MethodName,
-                    Request.Content.ReadAsStringAsync().Result);
+                    requstjsonstr);
                 //回傳OK
                 return Ok(ret);
             }

@@ -10,10 +10,29 @@
         $(function () {
             $('#ButtonCal').click(
                 function () {
-                    //取得用戶輸入的參數
-                    var para = { 'height': $('#txbHeight').val(), 'weight': $('#txbWeight').val() };
+                    //获取用户输入
+                    var para = {}; //js 对象
+                    para.height = $('#txbHeight').val();
+                    para.weight = $('#txbWeight').val();
                     //呼叫API
                     ExecuteAPI('Example', 'BMI', para,
+			//呼叫WebAPI成功時運行的Call Back Function
+                        function (result) {
+                            alert(result.Data);
+                        }
+                        );
+                }
+                );
+        });
+
+        $(function () {
+            $('#ButtonCalDate').click(
+                function () {
+                    //获取用户输入
+                    var para = {};////js 对象
+                    para.nowdate = $('#txbDate').val() ; //jqery的ID选择器 获取的值val 
+                    //呼叫API
+                    ExecuteAPI('Example', 'CalDate', para,
 			//呼叫WebAPI成功時運行的Call Back Function
                         function (result) {
                             alert(result.Data);
@@ -28,12 +47,16 @@
     <div class="row" style="margin:10px">
         <div class="col-md-12">
             <div class="form-group">
-                身高:
+                <p>身高:</p>
                 <input id="txbHeight" class="form-control" placeholder="请输入身高" />
-                体重:
+                <p>体重:</p>
                 <input id="txbWeight" class="form-control" placeholder="请输入体重" />
                 <br />
                 <button class="btn btn-primary" id="ButtonCal">计算</button>
+                <br/><br />
+                <p>跳转到29天以后的指定日期:</p> 
+                <input id="txbDate" class="form-control" placeholder="请输入当前日期" />
+                <button class="btn btn-primary" id="ButtonCalDate">计算日期</button>
             </div>
         </div>
     </div>
